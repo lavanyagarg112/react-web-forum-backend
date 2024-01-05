@@ -76,6 +76,7 @@ GEM
       mutex_m
       tzinfo (~> 2.0)
     base64 (0.2.0)
+    bcrypt (3.1.20)
     bigdecimal (3.1.5)
     bootsnap (1.17.0)
       msgpack (~> 1.2)
@@ -87,6 +88,12 @@ GEM
     debug (1.9.1)
       irb (~> 1.10)
       reline (>= 0.3.8)
+    devise (4.9.3)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 4.1.0)
+      responders
+      warden (~> 1.2.3)
     drb (2.2.0)
       ruby2_keywords
     erubi (1.12.0)
@@ -127,12 +134,15 @@ GEM
       racc (~> 1.4)
     nokogiri (1.16.0-x86_64-linux)
       racc (~> 1.4)
+    orm_adapter (0.5.0)
     psych (5.1.2)
       stringio
     puma (6.4.1)
       nio4r (~> 2.0)
     racc (1.7.3)
     rack (3.0.8)
+    rack-cors (2.0.1)
+      rack (>= 2.0.0)
     rack-session (2.0.0)
       rack (>= 3.0.0)
     rack-test (2.1.0)
@@ -174,6 +184,9 @@ GEM
       psych (>= 4.0.0)
     reline (0.4.1)
       io-console (~> 0.5)
+    responders (3.1.1)
+      actionpack (>= 5.2)
+      railties (>= 5.2)
     ruby2_keywords (0.0.5)
     sqlite3 (1.7.0-aarch64-linux)
     sqlite3 (1.7.0-arm64-darwin)
@@ -183,6 +196,8 @@ GEM
     timeout (0.4.1)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    warden (1.2.9)
+      rack (>= 2.0.9)
     webrick (1.8.1)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
@@ -197,7 +212,9 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   debug
+  devise
   puma (>= 5.0)
+  rack-cors
   rails (~> 7.1.2)
   sqlite3 (~> 1.4)
   tzinfo-data

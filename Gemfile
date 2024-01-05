@@ -2,6 +2,10 @@ source "https://rubygems.org"
 
 ruby "3.2.2"
 
+gem 'devise'
+gem 'rack-cors'
+
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.2"
 
