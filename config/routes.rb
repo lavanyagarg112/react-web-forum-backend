@@ -10,7 +10,8 @@ Rails.application.routes.draw do
     post '/signup', to: 'users/registrations#create'
   end
 
-
+  # get 'logged_in', to: 'users#logged_in'
+  get 'logged_in', to: 'authentication#logged_in'
 
   # Health check route
   get "up" => "rails/health#show", as: :rails_health_check

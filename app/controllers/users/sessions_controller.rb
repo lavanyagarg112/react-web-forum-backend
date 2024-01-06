@@ -14,4 +14,24 @@ class Users::SessionsController < Devise::SessionsController
   def destroy
     super # or your custom logic
   end
+
+  private
+
+  # Override to prevent Devise from using flash messages
+  def set_flash_message!(*)
+    # No operation
+  end
+
+  def flash
+    @flash ||= Hash.new.tap do |fl|
+      def fl.[]=(*)
+      end
+
+      def fl.now
+        self
+      end
+    end
+  end
+
+
 end
