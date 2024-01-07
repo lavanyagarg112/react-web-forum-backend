@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   # config/routes.rb
   resources :user_datum, only: [:create, :update]
   
@@ -26,6 +27,7 @@ Rails.application.routes.draw do
 
   # If you have a root route, uncomment the following line
   # root "home#index"
+
   
   # ... other routes ...
 end

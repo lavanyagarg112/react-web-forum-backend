@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::API
     include ActionController::MimeResponds
     include ActionController::StrongParameters
+    include ActionController::Cookies
 
     before_action :configure_permitted_parameters, if: :devise_controller?
 

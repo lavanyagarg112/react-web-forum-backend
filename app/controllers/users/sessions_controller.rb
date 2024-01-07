@@ -5,6 +5,7 @@ class Users::SessionsController < Devise::SessionsController
     self.resource = warden.authenticate!(auth_options)
     if resource.persisted?
       sign_in(resource_name, resource)
+      puts "signedin"
       render json: { success: true, user: resource }, status: :ok
     else
       render json: { success: false, error: "Invalid login credentials" }, status: :unauthorized
@@ -13,7 +14,9 @@ class Users::SessionsController < Devise::SessionsController
 
 
   def destroy
+    reset_session
     sign_out current_user
+    cookies.delete('_my_unique_app_session')
     puts "signed out"
     render json: { success: true }
   end
