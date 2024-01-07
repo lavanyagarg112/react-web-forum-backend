@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   # config/routes.rb
   resources :user_datum, only: [:create, :update]
+  resources :posts
   
 
   # Devise routes
