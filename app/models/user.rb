@@ -1,5 +1,7 @@
 class User < ApplicationRecord
 
+  has_many :posts
+
   has_one :user_datum, dependent: :destroy, class_name: 'UserDatum'
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
