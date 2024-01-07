@@ -11,8 +11,11 @@ class Users::SessionsController < Devise::SessionsController
     end
   end
 
+
   def destroy
-    super # or your custom logic
+    sign_out current_user
+    puts "signed out"
+    render json: { success: true }
   end
 
   private

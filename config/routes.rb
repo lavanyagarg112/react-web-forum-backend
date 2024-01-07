@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  # config/routes.rb
+  resources :user_datum, only: [:create, :update]
+  
+
   # Devise routes
   devise_for :users, controllers: {
     sessions: 'users/sessions',
@@ -12,6 +17,9 @@ Rails.application.routes.draw do
 
   # get 'logged_in', to: 'users#logged_in'
   get 'logged_in', to: 'authentication#logged_in'
+  # config/routes.rb
+  get '/current_user_data', to: 'user_datum#current_user_data'
+
 
   # Health check route
   get "up" => "rails/health#show", as: :rails_health_check
