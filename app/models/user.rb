@@ -11,13 +11,13 @@ class User < ApplicationRecord
   after_create :create_user_datum
 
   def user_datum
-    super || build_user_datum(authorname: '')
+    super || build_user_datum(authorname: self.username)
   end
 
   private
 
   def create_user_datum
-    build_user_datum(authorname: '').save
+    build_user_datum(authorname: self.username).save
   end
 
 
