@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
 
+  before_action :set_post, only: [:edit, :update]
+
   def index
     posts = Post.includes(:tags).all
     render json: posts.as_json(include: :tags)
@@ -26,6 +28,20 @@ class PostsController < ApplicationController
       end
     end
 
+    def edit
+      render json: @post, include: :tags
+    end
+
+    def update
+
+      if @post.update(post_params.except(:tag_ids, :new_tags))
+        handle_tags(@post, params[:tag_ids], params[:new_tags])
+        render json: @post, include: :tags
+      else
+        render json: @post.errors, status: :unprocessable_entity
+      end
+    end
+
     def destroy
       post = Post.find(params[:id])
       if post.destroy
@@ -40,13 +56,16 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:title, :description, :author_name, :user_id, tag_ids: [], new_tags: [])
     end
+
+    def set_post
+      @post = Post.find(params[:id])
+    end
     
     def handle_tags(post, tag_ids, new_tag_names)
+      post.tags.clear if tag_ids.present? || new_tag_names.present?
       # Associate existing tags by IDs
       existing_tags = Tag.where(id: tag_ids)
-      puts "hi"
       existing_tags.each do |tag|
-        puts tag.name
         post.tags << tag unless post.tags.include?(tag)
       end
     
