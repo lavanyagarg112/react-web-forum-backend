@@ -12,7 +12,9 @@ class UserDatumController < ApplicationController
   
     def update
       @user_data = current_user.user_datum
+      puts "hiiiii"
       if @user_data.update(user_data_params)
+        current_user.posts.update_all(author_name: @user_data.authorname)
         render json: @user_data
       else
         render json: @user_data.errors, status: :unprocessable_entity

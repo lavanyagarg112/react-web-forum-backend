@@ -2,9 +2,13 @@ Rails.application.routes.draw do
 
 
   # config/routes.rb
-  resources :user_datum, only: [:create, :update]
+  resource :user_datum, only: [:create, :update], controller: 'user_datum'
+
   resources :posts
   resources :tags
+  # resource :user do
+  #   resource :user_datum, only: [:create, :update]
+  # end
   
 
   # Devise routes
