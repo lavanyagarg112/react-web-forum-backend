@@ -10,6 +10,12 @@ Rails.application.routes.draw do
   #   resource :user_datum, only: [:create, :update]
   # end
   
+  resources :posts do
+    resources :comments do
+      # If you want to enable creating replies through a nested route
+      resources :comments, path: 'replies'
+    end
+  end
 
   # Devise routes
   devise_for :users, controllers: {

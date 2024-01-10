@@ -9,7 +9,6 @@ class PostsController < ApplicationController
 
     def create
       post = Post.new(post_params.except(:tag_ids, :new_tags))
-      
     
       if post.save
         handle_tags(post, params[:tag_ids], params[:new_tags])
