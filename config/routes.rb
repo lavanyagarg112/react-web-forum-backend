@@ -21,7 +21,12 @@ Rails.application.routes.draw do
   resources :posts do
     resources :favorites
     delete 'favorites', to: 'favorites#destroy'
+    
   end
+
+  get 'favorites', to: 'favorites#index'
+  get 'favorites/check/:post_id', to: 'favorites#check', as: 'check_favorite'
+  
 
   # Devise routes
   devise_for :users, controllers: {

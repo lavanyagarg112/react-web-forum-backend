@@ -24,5 +24,12 @@ class FavoritesController < ApplicationController
       favorites = current_user.favorites.includes(:post)
       render json: favorites.map { |favorite| favorite.post }
     end
+
+    def check
+        is_favorite = current_user.favorites.exists?(post_id: params[:post_id])
+        puts "hi"
+        puts is_favorite
+        render json: { is_favorite: is_favorite }
+      end
   end
   
