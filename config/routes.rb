@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   # config/routes.rb
   get '/current_user_data', to: 'user_datum#current_user_data'
 
+  get 'search', to: 'posts#search'
 
   # Health check route
   get "up" => "rails/health#show", as: :rails_health_check

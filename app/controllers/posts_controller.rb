@@ -49,6 +49,12 @@ class PostsController < ApplicationController
         render json: { errors: post.errors.full_messages }, status: :unprocessable_entity
       end
     end
+
+    def search
+      tags = params[:tags].split(',')
+      @posts = Post.joins(:tags).where(tags: { id: tags }).distinct
+      render json: @posts.as_json(include: :tags)
+    end
   
     private
   
