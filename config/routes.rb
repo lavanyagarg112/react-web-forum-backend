@@ -14,7 +14,13 @@ Rails.application.routes.draw do
     resources :comments do
       # If you want to enable creating replies through a nested route
       resources :comments, path: 'replies'
+      
     end
+  end
+
+  resources :posts do
+    resources :favorites
+    delete 'favorites', to: 'favorites#destroy'
   end
 
   # Devise routes
