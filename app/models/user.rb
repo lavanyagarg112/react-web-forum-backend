@@ -1,7 +1,9 @@
 class User < ApplicationRecord
 
-  has_many :posts
+  has_many :posts, dependent: :destroy
   has_many :favorites, dependent: :destroy
+
+  has_many :comments, dependent: :destroy
 
   has_one :user_datum, dependent: :destroy, class_name: 'UserDatum'
   # Include default devise modules. Others available are:
