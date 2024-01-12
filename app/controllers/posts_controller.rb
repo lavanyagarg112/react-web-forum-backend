@@ -55,6 +55,15 @@ class PostsController < ApplicationController
       @posts = Post.joins(:tags).where(tags: { id: tags }).distinct
       render json: @posts.as_json(include: :tags)
     end
+
+    def user_posts
+      user = User.find_by(username: params[:username])
+      posts = user.posts.includes(:tags) # Assuming each post has many tags
+  
+      render json: posts.as_json(include: :tags)
+    rescue ActiveRecord::RecordNotFound
+      render json: { error: "User not found" }, status: :not_found
+    end
   
     private
   
