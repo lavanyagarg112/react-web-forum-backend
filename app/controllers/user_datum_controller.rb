@@ -1,5 +1,5 @@
 class UserDatumController < ApplicationController
-    before_action :authenticate_user!
+    before_action :authenticate_user!, except: [:profile]
   
     def create
       @user_data = current_user.build_user_datum(user_data_params)
@@ -27,6 +27,17 @@ class UserDatumController < ApplicationController
       end
 
       def show
+        user = User.find_by(username: params[:username])
+        user_data = user.user_datum
+    
+        if user_data
+          render json: user_data
+        else
+          render json: { error: 'User data not found' }, status: :not_found
+        end
+      end
+
+      def profile
         user = User.find_by(username: params[:username])
         user_data = user.user_datum
     
