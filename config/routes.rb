@@ -26,7 +26,7 @@ Rails.application.routes.draw do
 
   get 'favorites', to: 'favorites#index'
   get 'favorites/check/:post_id', to: 'favorites#check', as: 'check_favorite'
-  
+  get 'users/:username/user_data', to: 'user_datum#show'
 
   # Devise routes
   devise_for :users, controllers: {

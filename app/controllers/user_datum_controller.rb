@@ -25,11 +25,22 @@ class UserDatumController < ApplicationController
     def current_user_data
         render json: current_user.user_datum
       end
+
+      def show
+        user = User.find_by(username: params[:username])
+        user_data = user.user_datum
+    
+        if user_data
+          render json: user_data
+        else
+          render json: { error: 'User data not found' }, status: :not_found
+        end
+      end
   
     private
   
     def user_data_params
-      params.require(:user_data).permit(:authorname)
+      params.require(:user_data).permit(:authorname, :bio)
     end
   end
   
