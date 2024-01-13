@@ -53,7 +53,7 @@ Rails.application.routes.draw do
   # If you have a root route, uncomment the following line
   # root "home#index"
 
-  match "*path", to: "application#fallback_index_html", via: :all
+  # match "*path", to: "application#fallback_index_html", via: :all
   
   # ... other routes ...
 end
