@@ -1,5 +1,5 @@
 class UserDatumController < ApplicationController
-    before_action :authenticate_user!, except: [:profile]
+    before_action :authenticate_token, except: [:profile]
   
     def create
       @user_data = current_user.build_user_datum(user_data_params)

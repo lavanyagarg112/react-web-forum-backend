@@ -1,6 +1,6 @@
 # app/controllers/favorites_controller.rb
 class FavoritesController < ApplicationController
-    before_action :authenticate_user!
+    before_action :authenticate_token
   
     def create
       favorite = current_user.favorites.build(post_id: params[:post_id])

@@ -11,10 +11,13 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 2024_01_12_064141) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "comments", force: :cascade do |t|
     t.text "content"
-    t.integer "user_id", null: false
-    t.integer "post_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "post_id", null: false
     t.integer "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -25,27 +28,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_12_064141) do
   end
 
   create_table "favorites", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "post_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "post_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_favorites_on_post_id"
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
-  create_table "favourite_posts", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "post_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_favourite_posts_on_post_id"
-    t.index ["user_id"], name: "index_favourite_posts_on_user_id"
-  end
-
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "author_name"
@@ -54,8 +48,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_12_064141) do
   end
 
   create_table "taggings", force: :cascade do |t|
-    t.integer "post_id", null: false
-    t.integer "tag_id", null: false
+    t.bigint "post_id", null: false
+    t.bigint "tag_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_taggings_on_post_id"
@@ -64,13 +58,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_12_064141) do
 
   create_table "tags", force: :cascade do |t|
     t.string "name"
+    t.bigint "post_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_tags_on_post_id"
   end
 
   create_table "user_data", force: :cascade do |t|
     t.string "authorname"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "bio"
@@ -95,10 +91,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_12_064141) do
   add_foreign_key "comments", "users"
   add_foreign_key "favorites", "posts"
   add_foreign_key "favorites", "users"
-  add_foreign_key "favourite_posts", "posts"
-  add_foreign_key "favourite_posts", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "taggings", "posts"
   add_foreign_key "taggings", "tags"
+  add_foreign_key "tags", "posts"
   add_foreign_key "user_data", "users"
 end
