@@ -5,8 +5,8 @@ class Users::SessionsController < Devise::SessionsController
     self.resource = warden.authenticate!(auth_options)
     if resource.persisted?
       sign_in(resource_name, resource)
-      puts "signedin"
-      render json: { success: true, user: resource }, status: :ok
+      token = JWT.encode({ user_id: resource.id }, ENV['SECRET_KEY_BASE'], 'HS256')
+      render json: { success: true, user: resource, token: token }, status: :ok
     else
       render json: { success: false, error: "Invalid login credentials" }, status: :unauthorized
     end

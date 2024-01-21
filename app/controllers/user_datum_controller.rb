@@ -23,8 +23,13 @@ class UserDatumController < ApplicationController
     end
 
     def current_user_data
+      if current_user
         render json: current_user.user_datum
+      else
+        render json: { error: 'Not authenticated' }, status: :unauthorized
       end
+    end
+    
 
       def show
         user = User.find_by(username: params[:username])
