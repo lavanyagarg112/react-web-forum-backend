@@ -18,7 +18,7 @@
 # config/initializers/cors.rb
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
     allow do
-      origins 'https://react-web-forum-frontend.onrender.com' # Replace with the origin of your React app
+      origins 'https://threadtalk-t5y1.onrender.com' # Replace with the origin of your React app
   
       resource '*',
         headers: :any,
