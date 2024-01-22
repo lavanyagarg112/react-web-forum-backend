@@ -9,6 +9,10 @@ class ApplicationController < ActionController::API
     #     render file: 'public/index.html'
     #   end
 
+    def home
+      render json: { message: "Welcome to my API" }
+    end
+
     protected
 
     def configure_permitted_parameters
