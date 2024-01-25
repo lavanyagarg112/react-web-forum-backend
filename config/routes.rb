@@ -1,29 +1,26 @@
 Rails.application.routes.draw do
+  # ... other routes ...
 
-
-  # config/routes.rb
+  # Resources routes
   resource :user_datum, only: [:create, :update], controller: 'user_datum'
-
   resources :posts
   resources :tags
-  # resource :user do
-  #   resource :user_datum, only: [:create, :update]
-  # end
-  
+
+  # Nested resources routes for comments
   resources :posts do
     resources :comments do
-      # If you want to enable creating replies through a nested route
+      # Creating replies through a nested route
       resources :comments, path: 'replies'
-      
     end
   end
 
+  # Nested resources routes for favorites
   resources :posts do
     resources :favorites
     delete 'favorites', to: 'favorites#destroy'
-    
   end
 
+  # Custom routes
   get 'favorites', to: 'favorites#index'
   get 'favorites/check/:post_id', to: 'favorites#check', as: 'check_favorite'
   get 'users/:username/user_data', to: 'user_datum#profile'
@@ -40,21 +37,16 @@ Rails.application.routes.draw do
     post '/signup', to: 'users/registrations#create'
   end
 
-  # get 'logged_in', to: 'users#logged_in'
+  # Authentication routes
   get 'logged_in', to: 'authentication#logged_in'
-  # config/routes.rb
   get '/current_user_data', to: 'user_datum#current_user_data'
 
+  # Search route
   get 'search', to: 'posts#search'
 
   # Health check route
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # If you have a root route, uncomment the following line
-  # root "home#index"
+  # Root route
   root to: 'application#home'
-
-  # match "*path", to: "application#fallback_index_html", via: :all
-  
-  # ... other routes ...
 end
