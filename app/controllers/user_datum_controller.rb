@@ -1,5 +1,5 @@
 # app/controllers/user_data_controller.rb
-class UserDataController < ApplicationController
+class UserDatumController < ApplicationController
   before_action :authenticate_token, except: [:profile]
 
   # Create user data for the current user.
