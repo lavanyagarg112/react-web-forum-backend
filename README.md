@@ -15,4 +15,8 @@ The backend provides various API endpoints for the frontend to interact with. He
 - /search: Search for posts by tags.
 - /current_user_data: Get data for the currently logged-in user.
 
+## Deployment
+
+The backend has been deployed on Render.
+
 Please refer to the [frontend repository](https://github.com/lavanyagarg112/threadtalk) for more details.
