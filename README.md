@@ -4,7 +4,7 @@ The backend connected to the [threadtalk](https://github.com/lavanyagarg112/thre
 
 ## API Endpoints
 
-The backend provides various API endpoints for your frontend to interact with. Here are some of the main endpoints:
+The backend provides various API endpoints for the frontend to interact with. Here are some of the main endpoints:
 
 - /posts: CRUD operations for posts.
 - /tags: CRUD operations for tags.
